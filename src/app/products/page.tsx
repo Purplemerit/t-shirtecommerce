@@ -4,20 +4,39 @@ import React, { useState, useEffect } from 'react';
 import { ChevronDown, Filter, X, Loader2 } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import styles from './products.module.css';
+import { useSearchParams } from 'next/navigation';
 
 const ProductsPage = () => {
+    const searchParams = useSearchParams();
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [products, setProducts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+    // Initialize state from URL params
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(searchParams.get('category'));
+    const [searchQuery, setSearchQuery] = useState<string | null>(searchParams.get('search'));
+
+    useEffect(() => {
+        // Update state when URL params change (e.g. navigation)
+        const category = searchParams.get('category');
+        const search = searchParams.get('search');
+        if (category !== selectedCategory) setSelectedCategory(category);
+        if (search !== searchQuery) setSearchQuery(search);
+    }, [searchParams]);
 
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);
             try {
-                const url = selectedCategory
-                    ? `/api/products?category=${encodeURIComponent(selectedCategory)}`
-                    : '/api/products';
+                let url = '/api/products';
+                const params = new URLSearchParams();
+
+                if (selectedCategory) params.append('category', selectedCategory);
+                if (searchQuery) params.append('search', searchQuery);
+
+                const queryString = params.toString();
+                if (queryString) url += `?${queryString}`;
+
                 const res = await fetch(url);
                 if (res.ok) {
                     const data = await res.json();
@@ -31,7 +50,7 @@ const ProductsPage = () => {
         };
 
         fetchProducts();
-    }, [selectedCategory]);
+    }, [selectedCategory, searchQuery]);
 
     const filters = [
         { title: 'Category', options: ['T-Shirts', 'Shoes', 'Jackets', 'Shorts'] },

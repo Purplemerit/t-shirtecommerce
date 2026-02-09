@@ -1,18 +1,26 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import styles from './checkout.module.css';
 import Upsell from '@/components/Upsell';
 import { CheckCircle, CreditCard, Banknote, QrCode, Truck } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const CheckoutPage = () => {
     const { cart, totalPrice, clearCart } = useCart();
     const { user } = useAuth();
+    const router = useRouter();
     const [isSuccess, setIsSuccess] = useState(false);
     const [showUpsell, setShowUpsell] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
+
+    useEffect(() => {
+        if (!user) {
+            router.push('/login?redirect=/checkout');
+        }
+    }, [user, router]);
 
     // 2: Address, 3: Payment
     const [step, setStep] = useState(2);

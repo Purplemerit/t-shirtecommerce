@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import styles from './login.module.css';
@@ -15,6 +15,8 @@ const LoginPage = () => {
     const [error, setError] = useState('');
     const { login } = useAuth();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const redirect = searchParams?.get('redirect') || undefined;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -31,7 +33,7 @@ const LoginPage = () => {
             const data = await res.json();
 
             if (res.ok && data.success) {
-                login(data.user.email, data.user.role);
+                login(data.user.email, data.user.role, redirect);
             } else {
                 setError(data.message || 'Login failed');
             }
@@ -47,7 +49,7 @@ const LoginPage = () => {
         setTimeout(() => {
             setIsLoading(false);
             alert(`${provider} Login is simulated for this demo. Redirecting...`);
-            login('demo@google.com', 'customer');
+            login('demo@google.com', 'customer', redirect);
         }, 1500);
     };
 
@@ -138,7 +140,7 @@ const LoginPage = () => {
                                 <button
                                     type="button"
                                     className={styles.secondaryBtn}
-                                    onClick={() => router.push('/signup')}
+                                    onClick={() => router.push(redirect ? `/signup?redirect=${redirect}` : '/signup')}
                                 >
                                     Create New Account
                                 </button>

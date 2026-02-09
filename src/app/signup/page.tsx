@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import styles from '../login/login.module.css';
@@ -19,6 +19,8 @@ const SignupPage = () => {
     const [error, setError] = useState('');
     const { login } = useAuth();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const redirect = searchParams?.get('redirect') || undefined;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -42,7 +44,7 @@ const SignupPage = () => {
 
             if (res.ok && data.success) {
                 // Determine user role (defaults to customer)
-                login(data.user.email, (data.user.role as 'admin' | 'customer') || 'customer');
+                login(data.user.email, (data.user.role as 'admin' | 'customer') || 'customer', redirect);
             } else {
                 setError(data.message || 'Signup failed');
             }
@@ -58,7 +60,7 @@ const SignupPage = () => {
         setTimeout(() => {
             setIsLoading(false);
             alert(`${provider} Signup is simulated for this demo.`);
-            login('newuser@google.com', 'customer');
+            login('newuser@google.com', 'customer', redirect);
         }, 1500);
     };
 
@@ -171,7 +173,7 @@ const SignupPage = () => {
                                 <button
                                     type="button"
                                     className={styles.secondaryBtn}
-                                    onClick={() => router.push('/login')}
+                                    onClick={() => router.push(redirect ? `/login?redirect=${redirect}` : '/login')}
                                 >
                                     Log In Instead
                                 </button>

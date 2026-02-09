@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, ChevronRight, Plus, Star, ShieldCheck, Heart, Share2 } from 'lucide-react';
+import { ArrowUpRight, ChevronRight, Plus, Star, ShieldCheck, Heart, Share2, Minus } from 'lucide-react';
 import styles from './page.module.css';
 
 export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -28,6 +29,10 @@ export default function Home() {
 
   const elegantProduct1 = products.find(p => p.name.includes("Saree")) || products[0];
   const elegantProduct2 = products.find(p => p.name.includes("Polo")) || products[1];
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
 
   return (
     <div className={styles.home}>
@@ -75,8 +80,8 @@ export default function Home() {
         <div className={styles.sustainHeader}>
           <h2>Sustainable, High-<br />Quality Fashion</h2>
           <div className={styles.sustainArrows}>
-            <button className={styles.whiteBtn}><ArrowUpRight size={24} /></button>
-            <button className={styles.whiteBtn}><ArrowUpRight size={24} /></button>
+            <Link href="/products" className={styles.whiteBtn}><ArrowUpRight size={24} /></Link>
+            <Link href="/about" className={styles.whiteBtn}><ArrowUpRight size={24} /></Link>
           </div>
         </div>
 
@@ -150,14 +155,15 @@ export default function Home() {
           <div className={styles.catGrid}>
             <div className={styles.catLeft}>
               {[
-                { name: 'Jackets', count: 378 },
-                { name: 'T-shirt', count: 120 },
-                { name: 'Shorts', count: 240 },
-                { name: 'Outer', count: 480 }
+                { name: 'Jackets', count: 378, id: 'jacket' },
+                { name: 'T-shirt', count: 120, id: 't-shirt' },
+                { name: 'Shorts', count: 240, id: 'shorts' },
+                { name: 'Outer', count: 480, id: 'outerwear' }
               ].map((cat, i) => (
-                <div key={i} className={styles.catItem}>
+                <Link href={`/products?category=${cat.id}`} key={i} className={styles.catItem}>
                   <span>{cat.name} ({cat.count})</span>
-                </div>
+                  <ArrowUpRight size={16} className={styles.catArrow} />
+                </Link>
               ))}
             </div>
             <div className={styles.catRight}>
@@ -206,7 +212,7 @@ export default function Home() {
               <div className={styles.helpBox}>
                 <h3>Help & Support</h3>
                 <p>Step into a new era of fashion with our cutting-edge styles and sophisticated designs.</p>
-                <button>Book a Call &gt;</button>
+                <Link href="/chat" style={{ fontWeight: 'bold', borderBottom: '1px solid currentColor', width: 'fit-content' }}>Book a Call &gt;</Link>
               </div>
             </div>
             <div className={styles.faqRight}>
@@ -219,10 +225,19 @@ export default function Home() {
                   "How can I track my order?",
                   "Is there a physical store I can visit?"
                 ].map((q, i) => (
-                  <div key={i} className={styles.faqRow}>
-                    <span className={styles.faqN}>0{i + 1}</span>
-                    <p>{q}</p>
-                    <Plus size={20} />
+                  <div key={i} className={styles.faqRow} onClick={() => toggleFaq(i)} style={{ cursor: 'pointer', flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                        <span className={styles.faqN}>0{i + 1}</span>
+                        <p style={{ margin: 0 }}>{q}</p>
+                      </div>
+                      {openFaq === i ? <Minus size={20} /> : <Plus size={20} />}
+                    </div>
+                    {openFaq === i && (
+                      <p style={{ paddingLeft: '3rem', color: '#666', fontSize: '0.9rem', lineHeight: '1.5' }}>
+                        Here is the detailed answer to "{q}". This content is static for demonstration purposes, but it shows the interactivity works.
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>

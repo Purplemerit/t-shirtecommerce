@@ -1,15 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { Star, Heart, ShoppingBag, ChevronRight, ChevronLeft, Check, Truck, RotateCcw, ShieldCheck, Shirt, Wind, Droplet, Ruler, Loader2, Gift, Plus, Minus, Share2 } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import styles from './product.module.css';
+import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
+import { useAuth } from '@/context/AuthContext';
 
 const ProductDetail = () => {
     const params = useParams();
+    const router = useRouter();
     const id = params?.id as string;
 
     const [product, setProduct] = useState<any>(null);
@@ -27,6 +30,7 @@ const ProductDetail = () => {
     const [recommendations, setRecommendations] = useState<any[]>([]);
     const { addToCart } = useCart();
     const { toggleWishlist, isInWishlist } = useWishlist();
+    const { user } = useAuth();
 
     useEffect(() => {
         if (!id) return;
@@ -86,7 +90,12 @@ const ProductDetail = () => {
         return <div style={{ textAlign: 'center', padding: 40 }}>Product not found</div>;
     }
 
-    const handleAddToCart = () => {
+    const handleAddToCart = (redirect = false) => {
+        if (!user) {
+            router.push('/login');
+            return;
+        }
+
         if (product.isGiftCard) {
             if (!selectedDenomination) {
                 alert('Please select a value');
@@ -101,7 +110,8 @@ const ProductDetail = () => {
                 size: 'N/A',
                 color: 'N/A'
             });
-            alert('Gift card added to cart!');
+            if (redirect) router.push('/checkout');
+            else alert('Gift card added to cart!');
             return;
         }
 
@@ -119,7 +129,20 @@ const ProductDetail = () => {
             size: selectedSize || 'One Size',
             color: product.colors?.[selectedColor] || 'Default'
         });
-        alert('Added to cart!');
+
+        if (redirect) {
+            router.push('/checkout');
+        } else {
+            alert('Added to cart!');
+        }
+    };
+
+    const handleWishlist = () => {
+        if (!user) {
+            router.push('/login');
+            return;
+        }
+        toggleWishlist(product);
     };
 
     return (
@@ -149,7 +172,7 @@ const ProductDetail = () => {
                                 )}
                             </div>
                             <img src={product.images?.[0] || '/images/Rectangle 2.png'} alt={product.name} className={styles.mainImage} />
-                            
+
                             <button className={styles.navBtnPrev}><ChevronLeft size={24} /></button>
                             <button className={styles.navBtnNext}><ChevronRight size={24} /></button>
                         </div>
@@ -165,7 +188,7 @@ const ProductDetail = () => {
                     {/* Product Info Section */}
                     <div className={styles.productInfo}>
                         <h1 className={styles.productTitle}>{product.name}</h1>
-                        
+
                         <div className={styles.statsRow}>
                             <div className={styles.ratingStars}>
                                 {[1, 2, 3, 4, 5].map(i => (
@@ -176,7 +199,7 @@ const ProductDetail = () => {
                         </div>
 
                         <p className={styles.shortDesc}>
-                           {product.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                            {product.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
                         </p>
 
                         {/* Color Selector */}
@@ -185,8 +208,8 @@ const ProductDetail = () => {
                                 <label className={styles.sectionLabel}>Colours</label>
                                 <div className={styles.colorOptions}>
                                     {product.colors.map((c: string, i: number) => (
-                                        <button 
-                                            key={i} 
+                                        <button
+                                            key={i}
                                             className={`${styles.colorCircle} ${selectedColor === i ? styles.activeColor : ''}`}
                                             style={{ backgroundColor: c }}
                                             onClick={() => setSelectedColor(i)}
@@ -202,8 +225,8 @@ const ProductDetail = () => {
                                 <label className={styles.sectionLabel}>Size</label>
                                 <div className={styles.sizeOptions}>
                                     {product.sizes.map((s: string) => (
-                                        <button 
-                                            key={s} 
+                                        <button
+                                            key={s}
                                             className={`${styles.sizeBtn} ${selectedSize === s ? styles.activeSize : ''}`}
                                             onClick={() => setSelectedSize(s)}
                                         >
@@ -235,21 +258,21 @@ const ProductDetail = () => {
 
                         {/* Main Actions */}
                         <div className={styles.mainActions}>
-                            <button className={styles.secondaryAction} onClick={() => toggleWishlist(product)}>
+                            <button className={styles.secondaryAction} onClick={handleWishlist}>
                                 <Heart size={20} fill={isInWishlist(product._id) ? "black" : "none"} /> Add to Wishlist
                             </button>
-                            <button className={styles.secondaryAction} onClick={handleAddToCart}>
+                            <button className={styles.secondaryAction} onClick={() => handleAddToCart(false)}>
                                 <ShoppingBag size={20} /> Add to Cart
                             </button>
                         </div>
-                        <button className={styles.buyNowFull} onClick={handleAddToCart}>Buy Now</button>
+                        <button className={styles.buyNowFull} onClick={() => handleAddToCart(true)}>Buy Now</button>
                     </div>
                 </div>
 
                 {/* Info Tabs / Accordions */}
                 <div className={styles.tabSection}>
                     <div className={styles.tabHeader} onClick={() => setActiveTab(activeTab === 'details' ? '' : 'details')}>
-                       Product Details <span className={styles.plusIcon}>{activeTab === 'details' ? '-' : '+'}</span>
+                        Product Details <span className={styles.plusIcon}>{activeTab === 'details' ? '-' : '+'}</span>
                     </div>
                     {activeTab === 'details' && (
                         <div className={styles.tabContent}>
@@ -263,7 +286,7 @@ const ProductDetail = () => {
                     )}
 
                     <div className={styles.tabHeader} onClick={() => setActiveTab(activeTab === 'size' ? '' : 'size')}>
-                       Size Chart <span className={styles.plusIcon}>{activeTab === 'size' ? '-' : '+'}</span>
+                        Size Chart <span className={styles.plusIcon}>{activeTab === 'size' ? '-' : '+'}</span>
                     </div>
                     {activeTab === 'size' && (
                         <div className={styles.tabContent}>
@@ -286,25 +309,25 @@ const ProductDetail = () => {
                 <div className={styles.magicSection}>
                     <h1>The Magic Behind The Comfort</h1>
                     <p>Every Faxico product is crafted with meticulous attention to detail, combining sustainable materials with cutting-edge textile technology.</p>
-                    
+
                     <div className={styles.magicGrid}>
-                         <div className={styles.magicCard}>
+                        <div className={styles.magicCard}>
                             <div className={styles.magicIcon}><ShieldCheck /></div>
                             <h3>Durability and Longevity</h3>
                             <p>Engineered to withstand wear and tear, ensuring a longer lifespan for everyday use.</p>
-                         </div>
-                         <div className={styles.magicCenterImg}>
-                             <img src="/images/Rectangle 5.png" alt="Fabric" />
-                         </div>
-                         <div className={styles.magicCard}>
+                        </div>
+                        <div className={styles.magicCenterImg}>
+                            <img src="/images/Rectangle 5.png" alt="Fabric" />
+                        </div>
+                        <div className={styles.magicCard}>
                             <div className={styles.magicIcon}><Droplet /></div>
                             <h3>Eco-Friendly Fabrics</h3>
                             <p>Utilize sustainable materials like organic cotton and bamboo, reducing environmental impact.</p>
-                         </div>
+                        </div>
                     </div>
                 </div>
 
-                 <div className={styles.sizeSection}>
+                <div className={styles.sizeSection}>
                     <div className={styles.sizeHeader}>
                         <h1>MEN'S CLOTHING SIZE CHART</h1>
                     </div>
@@ -342,45 +365,45 @@ const ProductDetail = () => {
                             </table>
                         </div>
                     </div>
-                 </div>
+                </div>
 
-                 <div className={styles.ecoBanner}>
+                <div className={styles.ecoBanner}>
                     <img src="/images/Rectangle 5 copy.png" alt="Eco" className={styles.ecoBg} />
                     <div className={styles.ecoOverlay}>
-                        <h2>Eco-Friendly Fashion<br/>Made with Sustainable Cotton</h2>
+                        <h2>Eco-Friendly Fashion<br />Made with Sustainable Cotton</h2>
                         <p>We source only the finest, eco-conscious materials, ensuring a luxurious feel and a commitment to environmental stewardship.</p>
-                        <button className={styles.buyNowFull} style={{ width: 'fit-content' }}>Shop Collection</button>
+                        <Link href="/products" className={styles.buyNowFull} style={{ width: 'fit-content' }}>Shop Collection</Link>
                     </div>
-                 </div>
+                </div>
 
-                 <section className={styles.reviewsSection}>
+                <section className={styles.reviewsSection}>
                     <div className={styles.revHeader}>
                         <h2>Reviews</h2>
-                        <button className={styles.secondaryAction}>Write a Review</button>
+                        <button className={styles.secondaryAction} onClick={() => alert('Review submission coming soon!')}>Write a Review</button>
                     </div>
                     <div className={styles.revGrid}>
-                         <div className={styles.revCard}>
+                        <div className={styles.revCard}>
                             <div className={styles.starsSmall}>
-                                {[1,2,3,4,5].map(s => <Star key={s} size={12} fill="gold" stroke="gold" />)}
+                                {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="gold" stroke="gold" />)}
                             </div>
                             <p>"Absolutely amazing quality. The fabric feels premium and the fit is perfect. Highly recommend Faxico!"</p>
                             <div className={styles.revAuthor}>
                                 <img src="/images/Rectangle 6.png" alt="Anjali" />
                                 <span>Anjali R.</span>
                             </div>
-                         </div>
-                         <div className={styles.revCard}>
+                        </div>
+                        <div className={styles.revCard}>
                             <div className={styles.starsSmall}>
-                                {[1,2,3,4,5].map(s => <Star key={s} size={12} fill="gold" stroke="gold" />)}
+                                {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="gold" stroke="gold" />)}
                             </div>
                             <p>"The block print saree is even more beautiful in person. The colors are so vibrant and it's very comfortable to wear."</p>
                             <div className={styles.revAuthor}>
                                 <img src="/images/Rectangle 2 copy.png" alt="Riya" />
                                 <span>Riya S.</span>
                             </div>
-                         </div>
+                        </div>
                     </div>
-                 </section>
+                </section>
             </div>
         </div>
     );

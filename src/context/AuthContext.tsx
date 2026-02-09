@@ -11,7 +11,7 @@ export interface User {
 
 interface AuthContextType {
     user: User | null;
-    login: (email: string, role: 'admin' | 'customer') => void;
+    login: (email: string, role: 'admin' | 'customer', redirectPath?: string) => void;
     logout: () => void;
     isAdmin: boolean;
 }
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, []);
 
-    const login = (email: string, role: 'admin' | 'customer') => {
+    const login = (email: string, role: 'admin' | 'customer', redirectPath?: string) => {
         const newUser: User = {
             name: role === 'admin' ? 'Administrator' : 'Customer',
             email,
@@ -43,8 +43,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(newUser);
         localStorage.setItem('faxico_user', JSON.stringify(newUser));
 
-        // Redirect based on role
-        if (role === 'admin') {
+        // Redirect based on role or provided path
+        if (redirectPath) {
+            router.push(redirectPath);
+        } else if (role === 'admin') {
             router.push('/admin');
         } else {
             router.push('/');
