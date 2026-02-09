@@ -1,0 +1,917 @@
+.productPage {
+    padding-bottom: 0;
+    font-family: var(--font-main);
+    color: #1a1a1a;
+    background: #fff;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Top Nav & Breadcrumbs */
+.topNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 2rem;
+}
+
+.backBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1a1a1a;
+    transition: transform 0.2s;
+}
+
+.backBtn:hover {
+    transform: translateX(-5px);
+}
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.activeCrumb {
+    color: #000;
+    font-weight: 600;
+}
+
+/* Main Layout Grid */
+.mainContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+}
+
+/* Gallery Section */
+.gallerySection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.mainImageContainer {
+    position: relative;
+    aspect-ratio: 4 / 5.5;
+    background: #f8f8f8;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.mainImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.discountBadgeTop {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    z-index: 2;
+}
+
+.navBtnPrev, .navBtnNext {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.navBtnPrev:hover, .navBtnNext:hover {
+    background: #fff;
+}
+
+.navBtnPrev { left: 1rem; }
+.navBtnNext { right: 1rem; }
+
+.thumbnailList {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.thumbItem {
+    width: 80px;
+    height: 100px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+    border: 2px solid transparent;
+}
+
+.activeThumb {
+    border-color: #000;
+}
+
+.thumbItem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Product Info Section */
+.productInfo {
+    padding-top: 1rem;
+}
+
+.productTitle {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.statsRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.ratingStars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ratingValue {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+.shortDesc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.infoSection {
+    margin-bottom: 2rem;
+}
+
+.sectionLabel {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+}
+
+.colorOptions {
+    display: flex;
+    gap: 1rem;
+}
+
+.colorCircle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #eee;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.activeColor {
+    box-shadow: 0 0 0 2px #000;
+    transform: scale(1.1);
+}
+
+.sizeOptions {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.sizeBtn {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    background: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.activeSize {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+/* Pricing Section */
+.priceContainer {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+}
+
+.priceBig {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #000;
+}
+
+.mrpSmall {
+    font-size: 1.2rem;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.percentOff {
+    color: #ff4d00;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Trust Badges */
+.trustRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.trustItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #555;
+    background: #f9f9f9;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+}
+
+/* Primary Actions */
+.mainActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.secondaryAction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    border: 1.5px solid #000;
+    border-radius: 12px;
+    background: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.secondaryAction:hover {
+    background: #f5f5f5;
+}
+
+.buyNowFull {
+    width: 100%;
+    padding: 1.2rem;
+    background: #000;
+    color: #fff;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-bottom: 2.5rem;
+    transition: opacity 0.2s;
+}
+
+.buyNowFull:hover {
+    opacity: 0.9;
+}
+
+.paymentIcons {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    opacity: 0.6;
+    margin-bottom: 2rem;
+}
+
+.paymentIcons img {
+    height: 20px;
+}
+
+/* Tabs / Accordions */
+.tabSection {
+    margin-top: 4rem;
+    border-top: 1px solid #eee;
+}
+
+.tabHeader {
+    padding: 1.5rem 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.plusIcon {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.tabContent {
+    padding: 2rem 0;
+    animation: fadeIn 0.3s ease;
+}
+
+.specsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.specItem {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.specItem span {
+    font-weight: 700;
+    color: #000;
+    margin-right: 0.5rem;
+}
+
+/* Sticky Bar */
+.stickyCartBar {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 4rem);
+    max-width: 1000px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.stickyInfo {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.stickyInfo img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.stickyInfo div {
+    display: flex;
+    flex-direction: column;
+}
+
+.stickyInfo strong {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.stickyInfo span {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.stickyActions {
+    display: flex;
+    gap: 1rem;
+}
+
+.stickyAdd, .stickyBuy {
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.stickyAdd {
+    border: 1.5px solid #000;
+    background: transparent;
+}
+
+.stickyBuy {
+    background: #000;
+    color: #fff;
+    border: none;
+}
+
+/* Sections Styling */
+.relatedSection {
+    margin-top: 6rem;
+}
+
+.secTitle {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 2.5rem;
+}
+
+.horizontalScroll {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 2rem;
+}
+
+.horizontalScroll::-webkit-scrollbar {
+    height: 4px;
+}
+
+.horizontalScroll::-webkit-scrollbar-thumb {
+    background: #eee;
+    border-radius: 10px;
+}
+
+/* Brand Graphic */
+.brandGraphic {
+    margin: 8rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.svgContainer {
+    position: relative;
+    color: #f0f0f0;
+}
+
+.svgContainer h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6rem;
+    font-weight: 900;
+    color: #000;
+    width: 100%;
+    letter-spacing: 5px;
+}
+
+/* Magic Section */
+.magicSection {
+    text-align: center;
+    margin-bottom: 8rem;
+}
+
+.magicSection h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+}
+
+.magicSection p {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    color: #666;
+    line-height: 1.8;
+}
+
+.magicGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.magicCard {
+    text-align: left;
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 24px;
+    border: 1.5px solid #f0f0f0;
+    transition: all 0.3s;
+}
+
+.magicCard:hover {
+    border-color: #000;
+    transform: translateY(-5px);
+}
+
+.magicIcon {
+    margin-bottom: 1.5rem;
+    color: #000;
+}
+
+.magicCard h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.magicCard p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+}
+
+.magicCenterImg img {
+    width: 100%;
+    border-radius: 24px;
+}
+
+/* Material Matters */
+.materialMatters {
+    text-align: center;
+    margin-bottom: 8rem;
+}
+
+.materialMatters h2 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.materialMatters h2 span {
+    color: #888;
+}
+
+.materialMatters p {
+    color: #666;
+    margin-bottom: 4rem;
+}
+
+.matGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.matItem {
+    text-align: left;
+    background: #fcf6f4;
+    padding: 2rem;
+    border-radius: 24px;
+}
+
+.matItem img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+}
+
+.matItem h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.matItem p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.matItem:nth-child(2) { background: #f4f6fc; }
+.matItem:nth-child(3) { background: #fdfdfd; border: 1px solid #eee; }
+
+/* Size Section */
+.sizeSection {
+    background: #f7f7f7;
+    padding: 6rem 4rem;
+    border-radius: 40px;
+    margin-bottom: 8rem;
+}
+
+.sizeHeader h1 {
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 5rem;
+    letter-spacing: -2px;
+}
+
+.sizeLayout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.sizeDiagram img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.sizeTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sizeTable th {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 800;
+    border-bottom: 2px solid #ddd;
+}
+
+.sizeTable td {
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.sizeTable td:first-child {
+    font-weight: 800;
+    text-align: left;
+}
+
+/* Eco Banner */
+.ecoBanner {
+    position: relative;
+    height: 600px;
+    border-radius: 40px;
+    overflow: hidden;
+    margin-bottom: 8rem;
+}
+
+.ecoBg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ecoOverlay {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 4rem;
+    border-radius: 30px;
+}
+
+.ecoOverlay h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.ecoOverlay p {
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+}
+
+/* Reviews */
+.reviewsSection {
+    margin-bottom: 8rem;
+}
+
+.revHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.revHeader h2 {
+    font-size: 3rem;
+    font-weight: 800;
+}
+
+.writeRev {
+    padding: 1rem 2rem;
+    border: 1.5px solid #000;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.revGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+}
+
+.revCard {
+    background: #fff;
+    border-radius: 30px;
+    padding: 3rem;
+    border: 1.5px solid #f0f0f0;
+    transition: all 0.3s;
+}
+
+.revCard:hover {
+    border-color: #000;
+    transform: translateY(-10px);
+}
+
+.starsSmall {
+    margin-bottom: 1.5rem;
+}
+
+.revCard p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 2rem;
+    min-height: 100px;
+}
+
+.revAuthor {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 1.5rem;
+}
+
+.revAuthor img {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.revAuthor span {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Newsletter & Footer */
+.newsletter {
+    background: #000;
+    color: #fff;
+    padding: 8rem 0 4rem;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.newsContent h2 {
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 3rem;
+    letter-spacing: -2px;
+}
+
+.emailBox {
+    max-width: 800px;
+    margin: 0 auto 8rem;
+    background: #111;
+    border-radius: 100px;
+    padding: 0.5rem;
+    border: 1px solid #333;
+}
+
+.emailBox input {
+    width: 100%;
+    padding: 1.5rem 3rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.footerBottom {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    text-align: left;
+    gap: 4rem;
+    padding-bottom: 4rem;
+}
+
+.footLogo {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.heart { color: #ff4d00; }
+
+.footLinks {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.footLinks h4 {
+    color: #888;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.footLinks p {
+    margin-bottom: 0.8rem;
+    color: #ccc;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.hugeFaxico {
+    font-size: 20rem;
+    font-weight: 900;
+    color: #111;
+    line-height: 0.8;
+    margin-top: 4rem;
+    opacity: 0.5;
+}
+
+.copyright {
+    grid-column: span 2;
+    text-align: left;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* Anim */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+    .mainContainer, .sizeLayout, .magicGrid, .matGrid, .revGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footerBottom {
+        grid-template-columns: 1fr;
+    }
+    
+    .footLinks {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .newsContent h2 {
+        font-size: 2.5rem;
+    }
+    
+    .hugeFaxico {
+        font-size: 10rem;
+    }
+}

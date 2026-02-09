@@ -1,0 +1,376 @@
+.about {
+    padding-bottom: 6rem;
+}
+
+.hero {
+    margin-bottom: 6rem;
+    padding-top: 2rem;
+}
+
+.heroContent {
+    /* Renamed to heroContainer in page.tsx for clarity, but if I missed renaming it there I'll check, 
+       but I did rename it in thetsx replacement. Wait, I should ensure consistency. 
+       In the TSX I used `heroContainer`. I will include that here. */
+}
+
+.heroBanner {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    border-radius: 40px 100px 40px 100px;
+    /* Unique shape: TL, TR, BR, BL - Wait, reference looked like TL big, BR big? 
+    Let's try standard 40px then customize. 
+    Actually, looking at the image: Top Left is somewhat standard/rounded. Bottom Right is weirdly cut/rounded.
+    Let's go with the user's likely intent for "unique shape" -> large rounding on opposing corners or a specific sleek look.
+    I will use: border-radius: 80px 30px 80px 30px; 
+    */
+    border-radius: 60px 20px 60px 20px;
+    overflow: hidden;
+}
+
+.heroBanner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.heroOverlay {
+    position: absolute;
+    inset: 0;
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 50%);
+}
+
+.heroText {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    line-height: 1.1;
+}
+
+.heroTitleLight {
+    font-size: 3.5rem;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.heroTitleBold {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.glassCard {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+    max-width: 450px;
+    color: white;
+}
+
+.glassCard p {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    font-weight: 400;
+    margin: 0;
+    /* Remove default margin */
+}
+
+@media (max-width: 768px) {
+    .heroBanner {
+        height: 500px;
+        border-radius: 30px;
+    }
+
+    .heroOverlay {
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .glassCard {
+        max-width: 100%;
+        padding: 1.5rem;
+    }
+
+    .heroTitleLight {
+        font-size: 2.5rem;
+    }
+
+    .heroTitleBold {
+        font-size: 3rem;
+    }
+
+    .glassCard p {
+        font-size: 1rem;
+    }
+}
+
+.journey {
+    margin-bottom: 8rem;
+}
+
+.journeyGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+}
+
+.journeyText h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+}
+
+.journeyText p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.stats h3 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stats p {
+    margin-bottom: 0;
+}
+
+.journeyImages {
+    display: flex;
+    gap: 2rem;
+}
+
+.journeyImages img {
+    width: calc(50% - 1rem);
+    border-radius: var(--radius-lg);
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+/* Materials */
+.materials {
+    background: #f8f8f8;
+    padding: 8rem 0;
+    margin-bottom: 8rem;
+}
+
+.sectionHeader {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.sectionHeader h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.materialGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+}
+
+.materialCard {
+    background: white;
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+}
+
+.materialCard img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    margin-bottom: 2rem;
+}
+
+.materialCard h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.materialCard p {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Mission & Vision */
+.missionVision {
+    margin-bottom: 8rem;
+}
+
+.mvGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    margin-bottom: 8rem;
+}
+
+.mvCard h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.mvCard p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.tag {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.mvButtons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.mvButtons button {
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+}
+
+.mvImage img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    aspect-ratio: 4/5;
+    object-fit: cover;
+}
+
+.visionList {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.visionList h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Pillars */
+.pillars {
+    margin-bottom: 8rem;
+}
+
+.pillars h2 {
+    font-size: 3rem;
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.pillarGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.pillarCard {
+    background: #f9f9f9;
+    padding: 4rem;
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.pillarId {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    font-size: 8rem;
+    font-weight: 900;
+    opacity: 0.05;
+}
+
+.pillarCard h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+/* CTA */
+.cta {
+    padding: 8rem 0;
+    background: var(--primary);
+    color: white;
+    border-radius: var(--radius-lg);
+    margin: 0 2rem;
+}
+
+.cta h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta p {
+    opacity: 0.8;
+    margin-bottom: 3rem;
+}
+
+.ctaButtons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.primaryBtn {
+    background: white;
+    color: black;
+    padding: 1.2rem 3rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+}
+
+.secondaryBtn {
+    border: 1px solid white;
+    color: white;
+    padding: 1.2rem 3rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+}
+
+.center {
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+
+    .journeyGrid,
+    .mvGrid,
+    .materialGrid,
+    .pillarGrid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .reverse .mvImage {
+        order: 2;
+    }
+}

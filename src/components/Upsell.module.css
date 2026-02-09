@@ -1,0 +1,247 @@
+.upsellContainer {
+    padding: 2rem 0 6rem;
+    font-family: var(--font-sans);
+}
+
+.successHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #2ecc71;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.viewOrderLink {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.mainContent {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.greenBanner {
+    background: #d4fcdb;
+    color: #2c3e50;
+    text-align: center;
+    padding: 0.8rem;
+    font-weight: 500;
+    font-size: 1rem;
+    border-radius: 30px;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.splitLayout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.imageSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mainImage {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.mainImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnails {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}
+
+.thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.thumb:hover {
+    border-color: black;
+}
+
+.navBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #eee;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detailsSection {
+    padding-top: 1rem;
+}
+
+.productName {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.priceBlock {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.originalPrice {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1.1rem;
+}
+
+.currentPrice {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.saveTag {
+    color: #27ae60;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.ratingRow {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 2rem;
+}
+
+.reviewCount {
+    font-size: 0.8rem;
+    color: #666;
+    margin-left: 0.5rem;
+}
+
+.urgencyText {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.quantitySection {
+    margin-bottom: 2rem;
+}
+
+.quantitySection label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.qtyControl {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    width: fit-content;
+}
+
+.qtyControl button {
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.qtyControl span {
+    width: 36px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.costBreakdown {
+    margin-bottom: 2rem;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.addToOrderBtn {
+    width: 100%;
+    background: black;
+    color: white;
+    padding: 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: transform 0.1s;
+}
+
+.addToOrderBtn:active {
+    transform: scale(0.98);
+}
+
+.declineBtn {
+    width: 100%;
+    background: white;
+    color: black;
+    padding: 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.declineBtn:hover {
+    background: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+    .splitLayout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}

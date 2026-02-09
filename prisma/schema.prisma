@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("customer")
+  createdAt DateTime @default(now()) @map("created_at")
+  phone     String?
+  orders    Order[]
+
+  @@map("users")
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  price       Decimal  @db.Decimal(10, 2)
+  mrp         Decimal? @db.Decimal(10, 2)
+  category    String?
+  tags        String[]
+  images      String[]
+  rating      Decimal? @default(0) @db.Decimal(3, 1)
+  reviews     Int?     @default(0)
+  createdAt   DateTime @default(now()) @map("created_at")
+  colors      String[]
+  sizes       String[]
+
+  @@map("products")
+}
+
+model Order {
+  id           Int      @id @default(autoincrement())
+  orderId      String   @unique @map("order_id")
+  userEmail    String?  @map("user_email")
+  items        Json?
+  shippingInfo Json?    @map("shipping_info")
+  amount       Decimal  @db.Decimal(10, 2)
+  currency     String   @default("INR")
+  status       String   @default("pending")
+  paymentId    String?  @map("payment_id")
+  discountCode String?  @map("discount_code")
+  createdAt    DateTime @default(now()) @map("created_at")
+  user         User?    @relation(fields: [userEmail], references: [email])
+
+  @@map("orders")
+}
+
+model Collection {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  image       String?
+  type        String   @default("manual")
+  productIds  String[] @map("product_ids")
+  conditions  Json?
+  sortOrder   String   @default("best-selling") @map("sort_order")
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("collections")
+}
+
+model Discount {
+  id                     Int       @id @default(autoincrement())
+  code                   String    @unique
+  type                   String    @default("percentage")
+  value                  Decimal   @db.Decimal(10, 2)
+  minPurchaseRequirement Decimal   @default(0) @map("min_purchase_requirement") @db.Decimal(10, 2)
+  usageLimit             Int?      @map("usage_limit")
+  usedCount              Int       @default(0) @map("used_count")
+  startDate              DateTime  @default(now()) @map("start_date")
+  endDate                DateTime? @map("end_date")
+  status                 String    @default("active")
+  appliesTo              String    @default("all") @map("applies_to")
+  targetIds              String[]  @map("target_ids")
+  active                 Boolean   @default(true)
+  createdAt              DateTime  @default(now()) @map("created_at")
+
+  @@map("discounts")
+}
+
+model Transfer {
+  id            Int      @id @default(autoincrement())
+  origin        String
+  destination   String
+  status        String   @default("pending")
+  items         Json?
+  referenceName String?  @map("reference_name")
+  notes         String?
+  tags          String[]
+  dateCreated   DateTime @default(now()) @map("date_created")
+
+  @@map("transfers")
+}

@@ -1,0 +1,34 @@
+.collectionCard {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.collectionCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.imageWrapper {
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+}
+
+.imageWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.collectionCard:hover .imageWrapper img {
+    transform: scale(1.05);
+}
+
+.info {
+    padding: 16px;
+    text-align: center;
+}

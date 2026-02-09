@@ -1,0 +1,42 @@
+.marqueeContainer {
+    width: 100%;
+    background: white;
+    padding: 1rem 0;
+    display: flex;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.scroll {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll 40s linear infinite;
+}
+
+.item {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-right: 1.5rem;
+    color: var(--text);
+}
+
+.heart {
+    color: #ff4d00;
+    margin-right: 1.5rem;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.marqueeContainer:hover .scroll {
+    animation-play-state: paused;
+}

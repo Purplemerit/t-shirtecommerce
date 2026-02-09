@@ -1,0 +1,135 @@
+.footer {
+    background: #000;
+    color: #fff;
+    padding: 8rem 0 0;
+    margin-top: 0;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+.newsContent {
+    text-align: center;
+    margin-bottom: 8rem;
+}
+
+.newsContent h2 {
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 3rem;
+    letter-spacing: -2px;
+}
+
+.emailBox {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #111;
+    border-radius: 100px;
+    padding: 0.5rem;
+    border: 1px solid #333;
+}
+
+.emailBox input {
+    width: 100%;
+    padding: 1.5rem 3rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: center;
+    outline: none;
+}
+
+.footerMain {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid #222;
+}
+
+.logoRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.logoText {
+    color: #fff;
+}
+
+.linksGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.linkGroup h4 {
+    color: #888;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.linkGroup a {
+    display: block;
+    margin-bottom: 0.8rem;
+    color: #ccc;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.linkGroup a:hover {
+    color: #fff;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.footerBottom {
+    padding: 2.5rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.copyright {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.hugeWatermark {
+    font-size: 20rem;
+    font-weight: 900;
+    color: #111;
+    line-height: 0.7;
+    margin-top: 2rem;
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+}
+
+@media (max-width: 1024px) {
+    .footerMain {
+        grid-template-columns: 1fr;
+    }
+
+    .linksGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .newsContent h2 {
+        font-size: 2.5rem;
+    }
+
+    .hugeWatermark {
+        font-size: 10rem;
+    }
+}

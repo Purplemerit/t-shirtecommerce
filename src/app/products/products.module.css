@@ -1,0 +1,186 @@
+.productsPage {
+    padding-bottom: 6rem;
+}
+
+.header {
+    margin-bottom: 3rem;
+}
+
+.breadcrumbs {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.breadcrumbs .active {
+    color: var(--text);
+    font-weight: 700;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.mainLayout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 3rem;
+}
+
+.sidebar {
+    border-right: 1px solid var(--border);
+    padding-right: 2rem;
+}
+
+.filterHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+}
+
+.filterHeader h3 {
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.closeBtn {
+    display: none;
+}
+
+.filterGroup {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+}
+
+.filterGroup h4 {
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.checkboxLabel:hover {
+    color: var(--primary);
+}
+
+.checkboxLabel input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2.5rem;
+}
+
+.sort {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.sort button {
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mobileFilterBtn {
+    display: none;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 2rem;
+}
+
+.pagination {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.viewMore {
+    padding: 1rem 3rem;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    transition: all 0.2s;
+}
+
+.viewMore:hover {
+    background: var(--primary);
+    color: white;
+}
+
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .mainLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: white;
+        z-index: 2000;
+        padding: 2rem;
+        transition: left 0.3s ease;
+        overflow-y: auto;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .closeBtn {
+        display: block;
+    }
+
+    .mobileFilterBtn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-left: auto;
+        font-weight: 700;
+    }
+
+    .sort {
+        display: none;
+    }
+}
