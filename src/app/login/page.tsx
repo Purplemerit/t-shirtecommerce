@@ -42,11 +42,24 @@ const LoginPage = () => {
         }
     };
 
+    const handleSocialLogin = (provider: string) => {
+        setIsLoading(true);
+        setTimeout(() => {
+            setIsLoading(false);
+            alert(`${provider} Login is simulated for this demo. Redirecting...`);
+            login('demo@google.com', 'user');
+        }, 1500);
+    };
+
     return (
         <div className={styles.authPage}>
             <div className={styles.container}>
                 {/* Left Side: Image */}
                 <div className={styles.imageSection}>
+                    <div className={styles.imageOverlay}>
+                        <h2>Premium Designs<br />Exclusively For You.</h2>
+                        <p>Join over 350k+ customers worldwide.</p>
+                    </div>
                     <img
                         src="/images/Frame 16.png"
                         alt="Fashion Model"
@@ -58,17 +71,17 @@ const LoginPage = () => {
                     <div className={styles.formContent}>
                         <div className={styles.header}>
                             <h1>Log In</h1>
-                            <p>Log in to your Account</p>
+                            <p>Enter your details to access your account</p>
                         </div>
 
                         {error && <div className={styles.error}>{error}</div>}
 
                         <form onSubmit={handleSubmit}>
                             <div className={styles.inputGroup}>
-                                <label>Email</label>
+                                <label>Email Address</label>
                                 <input
                                     type="email"
-                                    placeholder="hello@example.com"
+                                    placeholder="hello@faxico.com"
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
@@ -80,7 +93,7 @@ const LoginPage = () => {
                                 <div className={styles.passwordWrapper}>
                                     <input
                                         type={showPassword ? "text" : "password"}
-                                        placeholder="********"
+                                        placeholder="••••••••"
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
@@ -98,35 +111,38 @@ const LoginPage = () => {
                             <div className={styles.actions}>
                                 <label className={styles.checkbox}>
                                     <input type="checkbox" />
-                                    <span>Remember me</span>
+                                    <span>Keep me logged in</span>
                                 </label>
                                 <a href="/forgot-password" className={styles.forgot}>
-                                    Forget Password ?
+                                    Forgot Password?
                                 </a>
                             </div>
 
                             <button type="submit" className={styles.submitBtn} disabled={isLoading}>
-                                {isLoading ? 'Logging In...' : 'Login'}
+                                {isLoading ? 'Verifying...' : 'Sign In'}
                             </button>
 
                             <div className={styles.divider}>
-                                <span>or continue with</span>
+                                <span>OR</span>
                             </div>
 
                             <div className={styles.socialBtns}>
-                                <button type="button" className={styles.socialBtn}>
-                                    <img src="https://www.google.com/favicon.ico" alt="Google" width={20} />
-                                    Signup with Google
-                                </button>
-                                <button type="button" className={styles.socialBtn}>
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" width={16} />
-                                    Sign up with Apple
+                                <button type="button" className={styles.socialBtn} onClick={() => handleSocialLogin('Google')}>
+                                    <img src="https://www.google.com/favicon.ico" alt="Google" width={18} />
+                                    Sign in with Google
                                 </button>
                             </div>
 
-                            <p className={styles.switchAuth}>
-                                Don't have an account yet ? <Link href="/signup">Create Account</Link>
-                            </p>
+                            <div className={styles.signupBox}>
+                                <p>Don't have an account yet?</p>
+                                <button
+                                    type="button"
+                                    className={styles.secondaryBtn}
+                                    onClick={() => router.push('/signup')}
+                                >
+                                    Create New Account
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

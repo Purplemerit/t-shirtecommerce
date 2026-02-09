@@ -214,13 +214,72 @@
     font-weight: 800;
 }
 
+.imageOverlay {
+    position: absolute;
+    bottom: 60px;
+    left: 60px;
+    z-index: 2;
+    color: #fff;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.imageOverlay h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.imageOverlay p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.signupBox {
+    text-align: center;
+    border-top: 1px solid #f1f1f1;
+    padding-top: 2rem;
+    margin-top: 2rem;
+}
+
+.signupBox p {
+    color: #888;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.secondaryBtn {
+    width: 100%;
+    padding: 1.2rem;
+    background: transparent;
+    border: 2px solid #000;
+    color: #000;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.secondaryBtn:hover {
+    background: #000;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 1024px) {
     .container {
         grid-template-columns: 1fr;
         height: auto;
+        border-radius: 0;
+        width: 100%;
     }
 
     .imageSection {
         display: none;
+    }
+
+    .formSection {
+        padding: 3rem 1.5rem;
     }
 }

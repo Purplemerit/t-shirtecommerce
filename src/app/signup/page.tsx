@@ -52,11 +52,24 @@ const SignupPage = () => {
         }
     };
 
+    const handleSocialSignup = (provider: string) => {
+        setIsLoading(true);
+        setTimeout(() => {
+            setIsLoading(false);
+            alert(`${provider} Signup is simulated for this demo.`);
+            login('newuser@google.com', 'user');
+        }, 1500);
+    };
+
     return (
         <div className={styles.authPage}>
             <div className={styles.container}>
                 {/* Left Side: Image */}
                 <div className={styles.imageSection}>
+                    <div className={styles.imageOverlay}>
+                        <h2>Exclusive Access<br />Starts Here.</h2>
+                        <p>Create an account to track your orders in real-time.</p>
+                    </div>
                     <img
                         src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=1000"
                         alt="Fashion Model in Yellow"
@@ -67,33 +80,18 @@ const SignupPage = () => {
                 <div className={styles.formSection}>
                     <div className={styles.formContent}>
                         <div className={styles.header}>
-                            <h1>Create Your Account</h1>
-                            <p>Join us and start shopping</p>
+                            <h1>Create Account</h1>
+                            <p>Join the Faxico community today</p>
                         </div>
 
                         {error && <div className={styles.error}>{error}</div>}
 
                         <form onSubmit={handleSubmit}>
-                            {/* <div className={styles.inputGroup}>
-                                <label>Full Name</label>
-                                <input 
-                                    type="text" 
-                                    placeholder="John Doe" 
-                                    required
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                            </div> */}
-                            {/* Design in image doesn't show Name field explicitly in form but API needs it. 
-                                I will add it but keep style. Or if strictly following image, remove it? 
-                                User said "ditto same". Image shows Email, Password, Confirm Password.
-                                I'll keep name hidden or add it cleanly. Let's add it for functionality but keep it clean.
-                            */}
                             <div className={styles.inputGroup}>
                                 <label>Full Name</label>
                                 <input
                                     type="text"
-                                    placeholder="John One"
+                                    placeholder="Enter your name"
                                     required
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
@@ -101,10 +99,10 @@ const SignupPage = () => {
                             </div>
 
                             <div className={styles.inputGroup}>
-                                <label>Email</label>
+                                <label>Email Address</label>
                                 <input
                                     type="email"
-                                    placeholder="hello@chainex.co"
+                                    placeholder="hello@faxico.com"
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
@@ -116,7 +114,7 @@ const SignupPage = () => {
                                 <div className={styles.passwordWrapper}>
                                     <input
                                         type={showPassword ? "text" : "password"}
-                                        placeholder="********"
+                                        placeholder="••••••••"
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
@@ -131,32 +129,23 @@ const SignupPage = () => {
                                 </div>
                             </div>
 
-                            <div className={styles.inputGroup}>
-                                <label>Confirm Password</label>
-                                <div className={styles.passwordWrapper}>
-                                    <input
-                                        type={showConfirmPassword ? "text" : "password"}
-                                        placeholder="********"
-                                        required
-                                        value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                    />
-                                    <button
-                                        type="button"
-                                        className={styles.eyeBtn}
-                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                    >
-                                        {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                                    </button>
-                                </div>
-                            </div>
-
                             <button type="submit" className={styles.submitBtn} disabled={isLoading} style={{ marginTop: '1rem' }}>
-                                {isLoading ? 'Creating Account...' : 'Create Account'}
+                                {isLoading ? 'Creating Account...' : 'Continue to Shop'}
                             </button>
 
+                            <div className={styles.divider}>
+                                <span>OR</span>
+                            </div>
+
+                            <div className={styles.socialBtns}>
+                                <button type="button" className={styles.socialBtn} onClick={() => handleSocialSignup('Google')}>
+                                    <img src="https://www.google.com/favicon.ico" alt="Google" width={18} />
+                                    Signup with Google
+                                </button>
+                            </div>
+
                             <p className={styles.switchAuth} style={{ marginTop: '2rem' }}>
-                                Already have an account yet ? <Link href="/login">Login</Link>
+                                Already have an account? <Link href="/login" style={{ fontWeight: '800', color: '#000' }}>Login here</Link>
                             </p>
                         </form>
                     </div>
