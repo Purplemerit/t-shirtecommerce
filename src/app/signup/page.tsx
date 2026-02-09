@@ -27,6 +27,7 @@ const SignupPage = () => {
 
         if (password !== confirmPassword) {
             setError("Passwords don't match");
+            setIsLoading(false);
             return;
         }
 
@@ -40,8 +41,8 @@ const SignupPage = () => {
             const data = await res.json();
 
             if (res.ok && data.success) {
-                // Determine user role (defaults to user usually)
-                login(data.user.email, data.user.role || 'user');
+                // Determine user role (defaults to customer)
+                login(data.user.email, (data.user.role as 'admin' | 'customer') || 'customer');
             } else {
                 setError(data.message || 'Signup failed');
             }
@@ -125,6 +126,27 @@ const SignupPage = () => {
                                         onClick={() => setShowPassword(!showPassword)}
                                     >
                                         {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* RE-ADDED Confirm Password Field */}
+                            <div className={styles.inputGroup}>
+                                <label>Confirm Password</label>
+                                <div className={styles.passwordWrapper}>
+                                    <input
+                                        type={showConfirmPassword ? "text" : "password"}
+                                        placeholder="••••••••"
+                                        required
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                    />
+                                    <button
+                                        type="button"
+                                        className={styles.eyeBtn}
+                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    >
+                                        {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                     </button>
                                 </div>
                             </div>
