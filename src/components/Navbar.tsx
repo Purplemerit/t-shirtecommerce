@@ -47,16 +47,25 @@ const Navbar = () => {
                 <Link href="/chat">Lets Chat</Link>
               </div>
               <div className={styles.icons}>
-                <Link href={user ? "/account" : "/login"}>
-                  <Heart size={20} />
-                </Link>
-                <button onClick={() => setIsCartOpen(true)} className={styles.cartBtn}>
-                  <ShoppingBag size={20} />
-                  {totalItems > 0 && <span className={styles.badge}>{totalItems}</span>}
-                </button>
-                <Link href={user ? "/account" : "/login"} className={styles.profileCircle}>
-                  <User size={18} />
-                </Link>
+                {!user ? (
+                  <div className={styles.authLinks}>
+                    <Link href="/login" className={styles.loginText}>Login</Link>
+                    <Link href="/signup" className={styles.signupBtn}>Sign Up</Link>
+                  </div>
+                ) : (
+                  <>
+                    <Link href="/account">
+                      <Heart size={20} />
+                    </Link>
+                    <button onClick={() => setIsCartOpen(true)} className={styles.cartBtn}>
+                      <ShoppingBag size={20} />
+                      {totalItems > 0 && <span className={styles.badge}>{totalItems}</span>}
+                    </button>
+                    <Link href="/account" className={styles.profileCircle}>
+                      <User size={18} />
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>

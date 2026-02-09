@@ -56,6 +56,33 @@
     gap: 1.2rem;
 }
 
+.authLinks {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.loginText {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #000;
+}
+
+.signupBtn {
+    padding: 0.6rem 1.2rem;
+    background: #000;
+    color: #fff !important;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.signupBtn:hover {
+    background: #333;
+    transform: translateY(-1px);
+}
+
 .cartBtn {
     position: relative;
 }

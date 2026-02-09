@@ -47,7 +47,7 @@ const LoginPage = () => {
         setTimeout(() => {
             setIsLoading(false);
             alert(`${provider} Login is simulated for this demo. Redirecting...`);
-            login('demo@google.com', 'user');
+            login('demo@google.com', 'customer');
         }, 1500);
     };
 

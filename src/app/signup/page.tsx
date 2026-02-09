@@ -57,7 +57,7 @@ const SignupPage = () => {
         setTimeout(() => {
             setIsLoading(false);
             alert(`${provider} Signup is simulated for this demo.`);
-            login('newuser@google.com', 'user');
+            login('newuser@google.com', 'customer');
         }, 1500);
     };
 
@@ -144,9 +144,16 @@ const SignupPage = () => {
                                 </button>
                             </div>
 
-                            <p className={styles.switchAuth} style={{ marginTop: '2rem' }}>
-                                Already have an account? <Link href="/login" style={{ fontWeight: '800', color: '#000' }}>Login here</Link>
-                            </p>
+                            <div className={styles.signupBox}>
+                                <p>Already have an account?</p>
+                                <button
+                                    type="button"
+                                    className={styles.secondaryBtn}
+                                    onClick={() => router.push('/login')}
+                                >
+                                    Log In Instead
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

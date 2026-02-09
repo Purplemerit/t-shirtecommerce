@@ -6,12 +6,12 @@ import { useRouter } from 'next/navigation';
 export interface User {
     name: string;
     email: string;
-    role: 'admin' | 'user';
+    role: 'admin' | 'customer';
 }
 
 interface AuthContextType {
     user: User | null;
-    login: (email: string, role: 'admin' | 'user') => void;
+    login: (email: string, role: 'admin' | 'customer') => void;
     logout: () => void;
     isAdmin: boolean;
 }
@@ -34,9 +34,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, []);
 
-    const login = (email: string, role: 'admin' | 'user') => {
+    const login = (email: string, role: 'admin' | 'customer') => {
         const newUser: User = {
-            name: role === 'admin' ? 'Administrator' : 'User',
+            name: role === 'admin' ? 'Administrator' : 'Customer',
             email,
             role
         };
