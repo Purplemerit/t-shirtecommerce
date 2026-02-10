@@ -12,6 +12,7 @@ import { CartProvider } from "@/context/CartContext";
 import PromoModal from "@/components/PromoModal";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { AuthProvider } from "@/context/AuthContext";
+import { ToastProvider } from "@/context/ToastContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 export default function RootLayout({
@@ -25,14 +26,16 @@ export default function RootLayout({
         <ErrorBoundary>
           <CartProvider>
             <WishlistProvider>
-              <AuthProvider>
-                <Navbar />
-                <main style={{ minHeight: '100vh' }}>
-                  {children}
-                </main>
-                <Footer />
-                <PromoModal />
-              </AuthProvider>
+              <ToastProvider>
+                <AuthProvider>
+                  <Navbar />
+                  <main style={{ minHeight: '100vh' }}>
+                    {children}
+                  </main>
+                  <Footer />
+                  <PromoModal />
+                </AuthProvider>
+              </ToastProvider>
             </WishlistProvider>
           </CartProvider>
         </ErrorBoundary>

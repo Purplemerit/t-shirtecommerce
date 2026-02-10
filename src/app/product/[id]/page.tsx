@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/context/ToastContext';
 
 const ProductDetail = () => {
     const params = useParams();
@@ -31,6 +32,7 @@ const ProductDetail = () => {
     const { addToCart } = useCart();
     const { toggleWishlist, isInWishlist } = useWishlist();
     const { user } = useAuth();
+    const { showToast } = useToast();
 
     useEffect(() => {
         if (!id) return;
@@ -98,7 +100,7 @@ const ProductDetail = () => {
 
         if (product.isGiftCard) {
             if (!selectedDenomination) {
-                alert('Please select a value');
+                showToast('Please select a value', 'error');
                 return;
             }
             addToCart({
@@ -111,12 +113,12 @@ const ProductDetail = () => {
                 color: 'N/A'
             });
             if (redirect) router.push('/checkout');
-            else alert('Gift card added to cart!');
+            else showToast('Gift card added to cart!', 'success');
             return;
         }
 
         if (product.sizes?.length > 0 && !selectedSize) {
-            alert('Please select a size');
+            showToast('Please select a size', 'error');
             return;
         }
 
@@ -133,7 +135,7 @@ const ProductDetail = () => {
         if (redirect) {
             router.push('/checkout');
         } else {
-            alert('Added to cart!');
+            showToast('Added to cart!', 'success');
         }
     };
 
@@ -142,7 +144,16 @@ const ProductDetail = () => {
             router.push('/login');
             return;
         }
-        toggleWishlist(product);
+        const wishlistItem = {
+            id: product._id,
+            name: product.name,
+            price: product.price,
+            image: product.images?.[0] || '',
+            originalPrice: product.mrp
+        };
+        const inWishlist = isInWishlist(product._id);
+        toggleWishlist(wishlistItem);
+        showToast(inWishlist ? 'Removed from wishlist' : 'Added to wishlist', inWishlist ? 'info' : 'success');
     };
 
     return (

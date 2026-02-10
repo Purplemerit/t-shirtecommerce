@@ -75,7 +75,7 @@ const Navbar = () => {
                   </div>
                 ) : (
                   <>
-                    <Link href="/account">
+                    <Link href="/wishlist">
                       <Heart size={20} />
                     </Link>
                     <button onClick={() => setIsCartOpen(true)} className={styles.cartBtn}>
