@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import styles from '../login/login.module.css';
 
-const SignupPage = () => {
+const SignupForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -183,6 +183,14 @@ const SignupPage = () => {
                 </div>
             </div>
         </div>
+    );
+};
+
+const SignupPage = () => {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <SignupForm />
+        </Suspense>
     );
 };
 

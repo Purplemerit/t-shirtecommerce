@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { ChevronDown, Filter, X, Loader2 } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import styles from './products.module.css';
 import { useSearchParams } from 'next/navigation';
 
-const ProductsPage = () => {
+const ProductsContent = () => {
     const searchParams = useSearchParams();
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [products, setProducts] = useState<any[]>([]);
@@ -139,6 +139,14 @@ const ProductsPage = () => {
                 </div>
             </div>
         </div>
+    );
+};
+
+const ProductsPage = () => {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ProductsContent />
+        </Suspense>
     );
 };
 
